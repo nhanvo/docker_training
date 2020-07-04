@@ -1,10 +1,10 @@
-1. docker-compose up
+1. docker-compose up. 
 -------------------------------------------------------------------
-2. docker-compose up -d
+2. docker-compose up -d. 
 Starting composetest_redis_1...
 Starting composetest_web_1...
 
-$ docker-compose ps
+$ docker-compose ps. 
 Name                 Command                     State       Ports
 composetest_redis_1   /usr/local/bin/run         Up
 composetest_web_1     /bin/sh -c python app.py   Up          5000->5000/tcp
