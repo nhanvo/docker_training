@@ -9,11 +9,5 @@ Alpine based image with apache2 and php7
 # Usage
 
 ```
-docker run --detach 
-    --name alpine-apache-php \
-    --hostname docker_training.com \
-    --publish 8080:80 \
-    --restart always \
-    --volume /Users/nhanvo/Desktop/docker_training/BridgeNetwork/www:/htdocs \
-    alpine-apache-php:latest
+docker run --detach --name alpine-apache-php --hostname docker_training.com --publish 8080:80 --restart always --volume /Users/nhanvo/Desktop/docker_training/BridgeNetwork/www:/htdocs alpine-apache-php:latest
 ```
