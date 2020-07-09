@@ -7,6 +7,6 @@ services:
     image: ${IMAGE_NAME}:${ALPINE_VERSION}
     container_name: ${CONTAINER_NAME}
     volumes:
-       - ./www:/app
+       - ./www:/htdocs
     ports:
       - "${HOST_ADDRESS}:80"
