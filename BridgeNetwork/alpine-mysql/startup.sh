@@ -1,18 +1,25 @@
 #!/bin/sh
 
-if [ ! -d "/run/mysqld" ]; then
+if [ -d "/run/mysqld" ]; then
   mkdir -p /run/mysqld
+  chown -R mysql:mysql /run/mysqld
+else
+	echo "[i] mysqld not found, creating...."
+	mkdir -p /run/mysqld
+	chown -R mysql:mysql /run/mysqld
 fi
+
 
 if [ -d /app/mysql ]; then
   echo "[i] MySQL directory already present, skipping creation"
+  chown -R mysql:mysql /app/mysql
 else
   echo "[i] MySQL data directory not found, creating initial DBs"
-
-  mysql_install_db --user=root > /dev/null
+  mysql_install_db --user=root --ldata=/app/mysql > /dev/null
+  chown -R mysql:mysql /app/mysql
 
   if [ "$MYSQL_ROOT_PASSWORD" = "" ]; then
-    MYSQL_ROOT_PASSWORD=111111
+    MYSQL_ROOT_PASSWORD=root
     echo "[i] MySQL root Password: $MYSQL_ROOT_PASSWORD"
   fi
 
@@ -27,10 +34,12 @@ else
 
   cat << EOF > $tfile
 USE mysql;
-FLUSH PRIVILEGES;
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY "$MYSQL_ROOT_PASSWORD" WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
-ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+FLUSH PRIVILEGES ;
+GRANT ALL ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
+GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
+SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
+DROP DATABASE IF EXISTS test ;
+FLUSH PRIVILEGES ;
 EOF
 
   if [ "$MYSQL_DATABASE" != "" ]; then
@@ -48,4 +57,4 @@ EOF
 fi
 
 
-exec /usr/bin/mysqld --user=root --console
+exec /usr/bin/mysqld --user=root --console --skip-name-resolve --skip-networking=0 $@

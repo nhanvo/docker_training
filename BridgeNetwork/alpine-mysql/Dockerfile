@@ -1,8 +1,8 @@
 FROM alpine:latest
-LABEL Author="WangXian <xian366@126.com>""
+LABEL maintainer="WangXian <xian366@126.com>" 
 
 WORKDIR /app
-VOLUME /app
+#VOLUME /app
 
 RUN apk add --update mysql mysql-client && rm -f /var/cache/apk/*
 
