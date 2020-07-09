@@ -1,4 +1,6 @@
 # Clone from GIT: https://github.com/eriksoderblom/alpine-apache-php
+# alpine-apache-php
+a docker image base on alpine with apache and php
 
 ## Build with docker
 `docker build -t alpine-apache-php:latest .`
