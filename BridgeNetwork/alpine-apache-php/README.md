@@ -1,5 +1,4 @@
 # Clone from GIT: https://github.com/eriksoderblom/alpine-apache-php
-# alpine-apache-php
 
 ## Build with docker
 `docker build -t alpine-apache-php:latest .`
