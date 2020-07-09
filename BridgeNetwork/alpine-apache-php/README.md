@@ -1,21 +1,19 @@
-## alpine-apache-php
-Alpine based image with apache2 and php7
+# Clone from GIT: https://github.com/eriksoderblom/alpine-apache-php
+# alpine-apache-php
 
-[![](https://images.microbadger.com/badges/image/eriksoderblom/alpine-apache-php.svg)](https://microbadger.com/images/eriksoderblom/alpine-apache-php)
-
-# Build with docker
+## Build with docker
 `docker build -t alpine-apache-php:latest .`
 
-# Build with docker-compose
+## Build with docker-compose
 `docker-compose build`
 
-# Usage with docker
+## Usage with docker
 
 ```
 docker run --detach --name alpine-apache-php --hostname docker_training.com --publish 8080:80 --restart always --volume ./www:/htdocs alpine-apache-php:latest
 ```
 
-# Usage with docker-compose
+## Usage with docker-compose
 
 ```
 docker-compose up -d
