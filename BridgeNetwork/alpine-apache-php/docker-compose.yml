@@ -1,0 +1,12 @@
+version: '2'
+services:
+  apache-php:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: ${IMAGE_NAME}:${ALPINE_VERSION}
+    container_name: ${CONTAINER_NAME}
+    volumes:
+       - ./www:/app
+    ports:
+      - "${HOST_ADDRESS}:80"
