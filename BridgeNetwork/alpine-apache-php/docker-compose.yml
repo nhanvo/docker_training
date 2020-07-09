@@ -10,3 +10,8 @@ services:
        - ./www:/htdocs
     ports:
       - "${HOST_ADDRESS}:80"
+    networks: 
+      - www-net
+networks:
+  www-net:
+    external: true

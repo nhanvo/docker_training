@@ -16,3 +16,9 @@ services:
     #   - .:/app
     ports:
       - "${HOST_ADDRESS}:3306"
+    networks:
+      - www-net
+
+networks:
+  www-net:
+    external: true      
