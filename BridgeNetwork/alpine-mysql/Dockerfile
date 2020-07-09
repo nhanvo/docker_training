@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER WangXian <xian366@126.com>
+LABEL Author="WangXian <xian366@126.com>""
 
 WORKDIR /app
 VOLUME /app
