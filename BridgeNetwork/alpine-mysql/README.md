@@ -1,3 +1,4 @@
+# Clone form GIT: https://github.com/wangxian/alpine-mysql
 # alpine-mysql
 a docker image base on alpine with mysql
 
@@ -14,7 +15,7 @@ docker-compose build
 
 ## Usage (docker)
 ```
-docker run -it --name mysql -p 3306:3306 -v $(pwd):/app -e MYSQL_DATABASE=admin -e MYSQL_USER=tony -e MYSQL_PASSWORD=dpa\*12d -e MYSQL_ROOT_PASSWORD=111111 alpine-mysql
+docker run -it --name alpine-mysql -p 3306:3306 alpine-mysql
 ```
 
 ## Usage (docker-compose)
@@ -25,10 +26,6 @@ docker-compose up -d
 
 It will:
 - set no password for 'root' with localhost connections;
-- set password for 'root' with non-localhost connections (default is '111111');
-- create a new db (default is 'admin');
-- create an user and set his password for non-localhost connections only (defaults are 'tony' and 'dpa*12d').
-
-
-
-docker run -it --name mysql -p 3306:3306 -v $(pwd):/app -e MYSQL_DATABASE=admin -e MYSQL_USER=nhanvo -e MYSQL_PASSWORD=dpa\*12d -e MYSQL_ROOT_PASSWORD=root alpine-mysql
+- set password for 'root' with non-localhost connections (default is 'root');
+- create a new db (default is `hospital_db`);
+- create an user and set his password for non-localhost connections only (defaults are `nhanvo` and `nhanvo@123`).

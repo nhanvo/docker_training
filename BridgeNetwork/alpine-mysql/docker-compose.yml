@@ -1,6 +1,5 @@
-version: '2'
+version: '3'
 services:
-
   mysql:
     build:
       dockerfile: Dockerfile
@@ -16,3 +15,9 @@ services:
     #   - .:/app
     ports:
       - "${HOST_ADDRESS}:3306"
+    networks: 
+      - www-net
+      
+networks:
+  www-net:
+    external: true
