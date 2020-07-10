@@ -1,11 +1,11 @@
-<?php 
+<?php
   $content = '<div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
                   <!-- general form elements -->
                   <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Add Doctor</h3>
+                      <h3 class="box-title">Update Doctor</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -31,13 +31,13 @@
                             <label for="exampleInputName1">Gender</label>
                             <div class="radio">
                                 <label>
-                                <input type="radio" name="gender" id="optionsRadios1" value="0" checked="">
+                                <input type="radio" name="gender" id="gender0" value="0" checked="">
                                 Male
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                <input type="radio" name="gender" id="optionsRadios2" value="1">
+                                <input type="radio" name="gender" id="gender1" value="1">
                                 Female
                                 </label>
                             </div>
@@ -49,24 +49,43 @@
                       </div>
                       <!-- /.box-body -->
                       <div class="box-footer">
-                        <input type="button" class="btn btn-primary" onClick="AddDoctor()" value="Submit"></input>
+                        <input type="button" class="btn btn-primary" onClick="UpdateDoctor()" value="Update"></input>
                       </div>
                     </form>
                   </div>
                   <!-- /.box -->
                 </div>
               </div>';
-  include('../master.php');
+              
+  include('../index.php');
 ?>
 <script>
-  function AddDoctor(){
-
+    $(document).ready(function(){
+        $.ajax({
+            type: "GET",
+            url: "../api/doctor/read_single.php?id=<?php echo $_GET['id']; ?>",
+            dataType: 'json',
+            success: function(data) {
+                $('#name').val(data['name']);
+                $('#email').val(data['email']);
+                $('#password').val(data['password']);
+                $('#phone').val(data['phone']);
+                $('#gender'+data['gender']).prop("checked", true);
+                $('#specialist').val(data['specialist']);
+            },
+            error: function (result) {
+                console.log(result);
+            },
+        });
+    });
+    function UpdateDoctor(){
         $.ajax(
         {
             type: "POST",
-            url: '../api/doctor/create.php',
+            url: '../api/doctor/update.php',
             dataType: 'json',
             data: {
+                id: <?php echo $_GET['id']; ?>,
                 name: $("#name").val(),
                 email: $("#email").val(),        
                 password: $("#password").val(),
@@ -79,8 +98,8 @@
             },
             success: function (result) {
                 if (result['status'] == true) {
-                    alert("Successfully Added New Doctor!");
-                    window.location.href = '/medibed/doctor';
+                    alert("Successfully Updated Doctor!");
+                    window.location.href = '/doctor';
                 }
                 else {
                     alert(result['message']);

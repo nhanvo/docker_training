@@ -1,23 +1,31 @@
-# MySQL [![Docker Repository on Quay](https://quay.io/repository/perriea/alpine-mysql/status "Docker Repository on Quay")](https://quay.io/repository/perriea/alpine-mysql)
+# Clone form GIT: https://github.com/wangxian/alpine-mysql
+# alpine-mysql
+a docker image base on alpine with mysql
 
-## Versions
+## build image (docker)
+```
+docker build -t alpine-mysql:latest .
+```
+## build image (docker-compose)
+```
+cp .env-dist .env
+nano .env # change environment if you need
+docker-compose build
+```
 
-Alpine : `3.7`   
-MySQL : `mariaDB-10.1.28-r1`
+## Usage (docker)
+```
+docker run -it --name alpine-mysql -p 3306:3306 alpine-mysql
+```
 
-## Credentials
+## Usage (docker-compose)
+```
+docker-compose up -d
+```
 
-**Default :**  
-* `MYSQL_ROOT_PASSWORD` : `root`,
-* `MYSQL_DATABASE` : `app`,
-* `MYSQL_USER` : `app`,
-* `MYSQL_PASSWORD` : `app`,
-* `MYSQL_USER_MONITORING` : `monitoring`,
-* `MYSQL_PASSWORD_MONITORING` : `monitoring`
 
-**Custom :** In the `.env` file, change the different values to suit your needs.
-
-## Commands
-
-**Pull :** `docker pull quay.io/perriea/alpine-mysql:1.0`   
-**Run :** `docker run -d -p 3306:3306 --env-file .env quay.io/perriea/alpine-mysql:1.0`
+It will:
+- set no password for 'root' with localhost connections;
+- set password for 'root' with non-localhost connections (default is 'root');
+- create a new db (default is `hospital_db`);
+- create an user and set his password for non-localhost connections only (defaults are `nhanvo` and `nhanvo@123`).

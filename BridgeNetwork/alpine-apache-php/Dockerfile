@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:latest
 LABEL maintainer="erik.soderblom@gmail.com"
 LABEL description="Alpine based image with apache2 and php7."
 
